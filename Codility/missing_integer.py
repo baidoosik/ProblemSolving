@@ -18,7 +18,7 @@ def solution(A: List[int])->int:
 
 class TestCase(unittest.TestCase):
     def test(self):
-        input_a =  [1, 3, 6, 4, 1, 2]
+        input_a = [1, 3, 6, 4, 1, 2]
         expected = 5
 
         self.assertEqual(solution(input_a), expected)
