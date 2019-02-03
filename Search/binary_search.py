@@ -5,7 +5,7 @@ from typing import List
 def binary_search(target: int, a: List[int]) -> int:
     start, end = 0, len(a)
     mid = (start + end) // 2
-    while mid != 0 and mid != len(a):
+    while mid >= 0 and mid < len(a):
         if target > a[mid]:
             start = mid + 1
             mid = (start + end) // 2
