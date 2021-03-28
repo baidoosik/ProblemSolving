@@ -1,21 +1,25 @@
-import unittest
+import random
 
 
-def selection_sort(a: list) -> list:
-    min_idx = 0
-    for start in range(0, len(a)-1):
-        min_idx = start
-        for idx in range(start+1, len(a)):
-            if a[idx] < a[min_idx]:
+def selection_sort(array: list) -> list:
+    array_length = len(array)
+    for start_idx in range(0, array_length - 1):
+        min_idx = start_idx
+        for idx in range(start_idx, array_length):
+            if array[min_idx] > array[idx]:
                 min_idx = idx
-        a[start], a[min_idx] = a[min_idx], a[start]
-    return a
+        array[start_idx], array[min_idx] = array[min_idx], array[start_idx]
+    return array
 
 
-class SelectionSortTest(unittest.TestCase):
-    testcase1 = [1, 4, 4, 3, 1, 49, 8, 7, 6, 80]
-    testcase2 = [77, 6, 4, 3, 2, 21, 2198]
+def test_pass():
+    test_set = [
+        random.sample(range(10000000), k=17) for _ in range(10)
+    ]
+    test_set.append([])
+    for t in test_set:
+        assert sorted(t) == selection_sort(t)
+    print('All pass')
 
-    def test(self):
-        self.assertEqual(sorted(self.testcase1), selection_sort(self.testcase1))
-        self.assertEqual(sorted(self.testcase2), selection_sort(self.testcase2))
+
+test_pass()
