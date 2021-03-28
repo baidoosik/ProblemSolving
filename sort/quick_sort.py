@@ -1,30 +1,30 @@
-import unittest
+import random
 
 
-def _quick_sort(a: list, start: int, end: int) -> list:
+def quick_sort(array: list, start: int, end: int):
     if start < end:
-        pivot = a[end]
-        wall = start
+        pivot = array[end]
+        wall_idx = start
 
         for i in range(start, end):
-            if a[i] < pivot:
-                a[i], a[wall] = a[wall], a[i]
-                wall += 1
-        a[wall], a[end] = a[end], a[wall]
+            if array[i] < pivot:
+                array[i], array[wall_idx] = array[wall_idx], array[i]
+                wall_idx += 1
+        array[wall_idx], array[end] = array[end], array[wall_idx]
 
-        _quick_sort(a, start, wall - 1)
-        _quick_sort(a, wall + 1, end)
-    return a
-
-
-def quick_sort(a: list):
-    return _quick_sort(a, 0, len(a) - 1)
+        quick_sort(array, start, wall_idx - 1)
+        quick_sort(array, wall_idx+1, end)
 
 
-class QuickSortTest(unittest.TestCase):
-    test_case1 = [324, 5, 1, 4, 454, 45]
-    test_case2 = [4, 6, 4, 98, 2, 1, 3, 5, 5, 6]
+def test_pass():
+    test_set = [
+        random.sample(range(1000), k=17) for _ in range(10)
+    ]
+    test_set.append([])
+    for t in test_set:
+        quick_sort(t, 0, len(t) - 1)
+        assert sorted(t) == t
+    print('All pass')
 
-    def test(self):
-        self.assertEqual(sorted(self.test_case1), quick_sort(self.test_case1))
-        self.assertEqual(sorted(self.test_case2), quick_sort(self.test_case2))
+
+test_pass()

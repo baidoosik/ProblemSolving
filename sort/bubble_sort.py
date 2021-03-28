@@ -1,17 +1,22 @@
-import unittest
+import random
 
 
-def bubble_sort(a: list) -> list:
-    for end in range(len(a)-1, -1, -1):
+def bubble_sort(array: list):
+    for end in range(len(array) - 1, -1, -1):
         for i in range(end):
-            if a[i] > a[i+1]:
-                a[i], a[i+1], = a[i+1], a[i]
-    return a
+            if array[i] > array[i + 1]:
+                array[i], array[i + 1], = array[i + 1], array[i]
 
 
-class BubbleSortTestCase(unittest.TestCase):
-    test_case = [34, 3, 4, 1, 4, 6, 8, 9, 0, -1]
+def test_pass():
+    test_set = [
+        random.sample(range(1000), k=17) for _ in range(10)
+    ]
+    test_set.append([])
+    for t in test_set:
+        bubble_sort(t)
+        assert sorted(t) == t
+    print('All pass')
 
-    def test(self):
-        result = sorted(self.test_case)
-        self.assertEqual(bubble_sort(self.test_case), result)
+
+test_pass()
